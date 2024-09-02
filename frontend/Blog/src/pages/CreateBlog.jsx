@@ -4,6 +4,15 @@ import 'react-quill/dist/quill.snow.css';
 
 const Createblog = () => {
     const [value, setValue] = useState('');
+
+    const blankBlog = {
+        "title": "",
+        "image": "",
+        "post": "",
+        "category": "",
+    }
+
+    const [newblog, setNewblog] = useState(blankBlog);
     const menu = [
         { text: 'Nature', path: '/' },
         { text: 'Travel', path: '/' },
@@ -16,10 +25,11 @@ const Createblog = () => {
             <div className="bg-slate-300 w-[60%] p-5 rounded-xl">
                 <h1 className="text-2xl mb-5"> Create Blog post</h1>
                 <div className="flex flex-col">
+                    <small>{JSON.stringify(newblog)}</small>
                     <label htmlFor="" className="ml-1 text-gray-500">Title</label>
-                    <input type="text" className="h-10 border border-grey-300 rounded my-2 p-2" />
+                    <input type="text" value={newblog.title} onChange={(e) => setNewblog({ ...newblog, title: e.target.value })} className="h-10 border border-grey-300 rounded my-2 p-2" />
                     <label htmlFor="" className="ml-1 text-gray-500">Category</label>
-                    <select name="" id="" className="h-10 text-gray-500">
+                    <select value={newblog.category} onChange={(e) => setNewblog({ ...newblog, category: e.target.value })} className="h-10 text-gray-500">
                         {menu.map(x => {
                             return <option value={x.text}>{x.text}</option>
                         })}

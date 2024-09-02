@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Blogcard from '../components/Blogcard';
+import { getBlogs } from '../api/Api';
 
 const Home = () => {
+
+    const [blogs, setBlogs] = useState(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            const allBlogs = await getBlogs();
+            setBlogs(allBlogs.data);
+        }
+        fetchData();
+    }, []);
+
+
     const data = [
         {
             title: 'Is is worth investing in real estate ?',
@@ -49,6 +62,7 @@ const Home = () => {
 
     return (
         <div>
+            <p>{JSON.stringify(blogs)}</p>
             <div className="grid sm:grid-cols- md:grid-cols-3 gap-5">
                 {data.map(x => {
                     return <Blogcard blogdata={x} />
