@@ -5,6 +5,9 @@ const client = require("./db/conn");
 
 app.use(express.json());
 
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 
 app.get('/', (req, res) => {
     res.json({ 'Message': 'Hello word!' })
@@ -35,7 +38,7 @@ app.post('/blog', async (req, res) => {
             'INSERT INTO blogs (title, image, post) VALUES ($1, $2, $3) RETURNING *', // ใช้ RETURNING * เพื่อให้ได้ข้อมูลที่ถูกแทรก
             [req.body.title, req.body.image, req.body.post]
         );
-        res.status(201).json(result.rows[0]); // ส่งข้อมูลที่แทรกไปให้ client
+        res.json({ "message": "Added new blog", "desc": result.rowCount });// ส่งข้อมูลที่แทรกไปให้ client
     } catch (error) {
         console.error('Error inserting data:', error);
         res.status(500).json({ error: 'An error occurred while inserting data' });
