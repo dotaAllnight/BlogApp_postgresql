@@ -28,14 +28,17 @@ const Layout = () => {
 
                         </ul>
                         <button className='bg-slate-500 text-white px-2 py-1 rounded'>
-                            <Link>+ New post</Link>
+                            <Link to='/createblog'>+ New post</Link>
                         </button>
                     </div>
                 </div>
             </div>
             {/*<Body></Body>*/}
-            <div className='flex'>
-                <Outlet> </Outlet>
+            <div className='flex mx-auto px-5 md:px-20'>
+                <div className='mt-5 mb-5 min-h-[500px] w-full'>
+                    <Outlet></Outlet>
+
+                </div>
             </div>
             {/*<Footer></Footer>*/}
             <div className="flex bg-slate-800">
