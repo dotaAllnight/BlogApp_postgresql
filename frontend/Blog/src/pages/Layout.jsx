@@ -15,8 +15,9 @@ const Layout = () => {
             {/*<Header></Header>*/}
             <div className="border-b">
                 <div className="container px-5 py-5 flex justify-between">
-
-                    <span className='font-extrabold text-2xl'>BLOGGER</span>
+                    <Link to='/blog'>
+                        <span className='font-extrabold text-2xl'>BLOGGER</span>
+                    </Link>
                     <div className='flex'>
                         <ul className='flex'>
                             {
