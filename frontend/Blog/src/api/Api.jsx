@@ -2,9 +2,12 @@ import axios from 'axios';
 
 const apiURL = 'http://localhost:3000';
 
-export const getBlogs = () => {
+export const getBlogs = (cat) => {
     //return 
-    return axios.get(apiURL + '/blog')
+    if (!cat) {
+        cat = 'all';
+    }
+    return axios.get(apiURL + '/blog/' + cat)
         .then(result => {
             return result.data
         })
@@ -24,7 +27,14 @@ export const createBlog = (data) => {
         })
 }
 
-export const getBlogbyid = () => {
+export const getBlogbyid = (id) => {
+    return axios.get(apiURL + '/blogbyid/' + id)
+        .then(result => {
+            return result.data
+        })
+        .catch(error => {
+            return error
+        });
 
 }
 

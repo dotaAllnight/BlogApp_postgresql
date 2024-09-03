@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Blogcard from '../components/Blogcard';
 import { getBlogs } from '../api/Api';
+import { useSearchParams } from 'react-router-dom';
 
 const Home = () => {
 
+    let [searchParams, setSearchParams] = useSearchParams();
     const [blogs, setBlogs] = useState(null);
 
     useEffect(() => {
@@ -13,6 +15,15 @@ const Home = () => {
         }
         fetchData();
     }, []);
+
+    useEffect(() => {
+        async function fetchData() {
+            /*        let category = searchParams.get('category');*/
+            const allBlogs = await getBlogs(searchParams.get('category'));
+            setBlogs(allBlogs.data);
+        }
+        fetchData();
+    }, [searchParams]);
 
 
     const data = [
@@ -64,8 +75,8 @@ const Home = () => {
         <div>
 
             <div className="grid sm:grid-cols- md:grid-cols-3 gap-5">
-                {blogs && blogs.map(x => {
-                    return <Blogcard blogdata={x} />
+                {blogs && blogs.map((x, i) => {
+                    return <Blogcard key={i} blogdata={x} />
 
                 })}
             </div>

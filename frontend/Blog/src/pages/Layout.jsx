@@ -15,14 +15,14 @@ const Layout = () => {
             {/*<Header></Header>*/}
             <div className="border-b">
                 <div className=" px-5 py-5 flex justify-between">
-                    <Link to='/blog'>
+                    <Link to='/'>
                         <span className='font-extrabold text-2xl'>BLOGGER</span>
                     </Link>
                     <div className='flex'>
                         <ul className='flex'>
                             {
-                                menu.map(x => {
-                                    return <li><Link className='p-2 items-center justify-center flex'><span>{x.text}</span></Link></li>
+                                menu.map((x, i) => {
+                                    return <li key={i}><Link className='p-2 items-center justify-center flex ' to={`/?category=${x.text}`}><span>{x.text}</span></Link></li>
 
                                 })
                             }

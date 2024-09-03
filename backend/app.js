@@ -25,17 +25,17 @@ app.get('/', (req, res) => {
     res.json({ 'Message': 'Hello word!' })
 })
 
-app.get('/blog', async (req, res) => {
-    try {
-        const result = await client.query('SELECT * FROM blogs');
-        // ส่งผลลัพธ์ทั้งหมด
-        res.json({ "data": result.rows });
-    } catch (err) {
-        console.error('Error executing query', err.stack);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+app.get('/blog/:cat', async (req, res) => {
+    const result = await client.query(
+        req.params.cat != 'all' ? `SELECT * from blogs where category = '${req.params.cat}'` : 'SELECT * from blogs'
+    );
+    res.json({ "data": result.rows })
 });
 
+app.get('/blogbyid/:id', async (req, res) => {
+    const result = await client.query(`SELECT * FROM blogs WHERE id = ${req.params.id}`);
+    res.json({ "data": result.rows })
+})
 
 
 app.post('/blog', async (req, res) => {
