@@ -62,9 +62,9 @@ const Home = () => {
 
     return (
         <div>
-            <p>{JSON.stringify(blogs)}</p>
+
             <div className="grid sm:grid-cols- md:grid-cols-3 gap-5">
-                {data.map(x => {
+                {blogs && blogs.map(x => {
                     return <Blogcard blogdata={x} />
 
                 })}

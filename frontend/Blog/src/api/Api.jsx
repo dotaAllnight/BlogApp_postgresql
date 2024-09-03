@@ -27,3 +27,20 @@ export const createBlog = (data) => {
 export const getBlogbyid = () => {
 
 }
+
+export const uploadFile = (file) => {
+    const formdata = new FormData();
+    formdata.append('file', file);
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }
+    return axios.post(apiURL + '/blogimage', formdata, config)
+        .then(result => {
+            return result.data
+        })
+        .catch(error => {
+            return error
+        });
+}
